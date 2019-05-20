@@ -4,7 +4,7 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage[]{hyperref}
-%\usepackage[english]{babel}
+\usepackage[german]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[]{graphicx}
 \usepackage{xcolor}
@@ -15,12 +15,24 @@
 
 \title{Tutorium der Elektrodynamik}
 \author{Alejandro Gallo}
+\date{\today}
 
+\newcommand\sourcefootnotes{
+\footnote{\tiny \url{alejandro.gallo@tuwien.ac.at} }
+\footnote{\tiny
+  \url{
+    https://raw.githubusercontent.com/alejandrogallo/
+    tutorium-elektrodynamik-SS-2019/master/kondensator/main.pdf
+  }
+}
+}
 
 \begin{document}
 
 \maketitle
 \tableofcontents
+
+Für mehr Information können Sie im Netz Information finden\sourcefootnotes.
 
 \section{Zylindrischer Kondensator}
 Hier werden wir einige typische Beispiele
@@ -140,7 +152,7 @@ $ V(R_{0}) = V_{0} $.
 Wir müssen dann erkunden wie die Ableitung der Funktion $ V $ (das heißt,
 das elektrische Feld) aussieht. Wenn dies uns gelingt dann wird es uns
 ermöglichen, Bedingungen für die erste Ableitung von $ V $ zu finden,
-dementsprechend arbeiten wir hier mit \textit{Dirichlet Randbedingungen}.
+dementsprechend arbeiten wir hier mit \textit{Cauchy Randbedingungen}.
 Wir können das Volumen $ G $ dafür verwenden:
 %
 \begin{align*}
@@ -158,7 +170,7 @@ Wir können das Volumen $ G $ dafür verwenden:
 %
 und deswegen haben wir im Inneren $ \mathbf{E} = 0 $, $ V = V_{0} $.
 Daraus folgt, dass $ A = 0 $ und somit haben wir die fehlende
-Integrationskonstante $ A $ bestimmt, nämlich mittels \textit{Dirichlet
+Integrationskonstante $ A $ bestimmt, nämlich mittels \textit{Cauchy
 Randbedingungen}.
 
 \subsection{Potential im Inneren eines einfachen zylindrischen Kondensators}
@@ -179,7 +191,8 @@ Deswegen wissen wir dass im Zwischenraum das Potential $ V $
 ist.
 In diesem Fall können wir aber $ A $ bestimmen da
 \textit{Dirichlet Randbedingungen}
-herrschen, d.h., wir haben zwei Punkte für die Randbedingungen.
+herrschen, d.h., wir haben zwei Punkte für die Randbedingungen in $ V(r) $
+wo $ R_{0} \leq r \leq R_{1} $.
 Diese Randbedingungen lauten
 %
 \begin{equation*}
@@ -236,13 +249,13 @@ Wir können die Ladung mittels folgender Gleichung ausrechnen
 %
 \begin{equation*}
   Q =
-  \int_{V}
+  \int_{\mathcal V}
     \rho (\mathbf{r})
   \ \mathrm{d}^{3}x
   .
 \end{equation*}
 %
-Wir müssen das Volumen $ V $ bestimmen, und man kann sich überzeugen,
+Wir müssen das Volumen $ \mathcal V $ bestimmen, und man kann sich überzeugen,
 dass wir über dem grauen Bereich in der darunterliegenden Abbildung
 integrieren soll.
 \begin{center}
@@ -254,5 +267,116 @@ davon übernimmt. Hierunter sind die Hauptmerkmale skizziert
 \begin{center}
   \input{figures/functions.tex}
 \end{center}
+%
+\begin{align*}
+  Q = &
+  \int_{\mathcal V}
+    \rho (\mathbf{r})
+  \ \mathrm{d}^{3}x
+  =
+  \epsilon_{0}
+  \int_{\mathcal V}
+    \nabla^{2}
+    V(r)
+  \ \mathrm{d}^{3}x
+  =
+  \epsilon_{0}
+  \int_{\mathcal V}
+    \frac{1}{r}
+    \frac{\mathrm{d}}{\mathrm{d}r}
+    r
+    \frac{\mathrm{d}}{\mathrm{d}r}
+    V(r)
+  \ \mathrm{d}^{3}x
+  \\
+  =&
+  \epsilon_{0}
+  \int_{\mathcal V}
+    \frac{1}{r}
+    \frac{\mathrm{d}}{\mathrm{d}r}
+    r
+    \frac{\mathrm{d}}{\mathrm{d}r}
+    V(r)
+  \
+  r
+  \mathrm{d}z
+  \mathrm{d}\phi
+  \mathrm{d}r
+  \\
+  =&
+  \epsilon_{0}
+  \int_{R_{0} - \varepsilon}^{R_{0} + \varepsilon}
+  \int_{0}^{2\pi}
+  \int_{0}^{\ell}
+    {\color{red}\frac{1}{r} }
+    \frac{\mathrm{d}}{\mathrm{d}r}
+    r
+    \frac{\mathrm{d}}{\mathrm{d}r}
+    V(r)
+  \
+  {\color{red}r }
+  \mathrm{d}z
+  \mathrm{d}\phi
+  \mathrm{d}r
+  \\
+  =&
+  2\pi\ell
+  \epsilon_{0}
+  \int_{R_{0} - \varepsilon}^{R_{0} + \varepsilon}
+    \frac{\mathrm{d}}{\mathrm{d}r}
+    r
+    \frac{\mathrm{d}}{\mathrm{d}r}
+    V(r)
+  \
+  \mathrm{d}r
+  =
+  -
+  2\pi\ell
+  \epsilon_{0}
+  \int_{R_{0} - \varepsilon}^{R_{0} + \varepsilon}
+    \frac{\mathrm{d}}{\mathrm{d}r}
+    r
+    E(r)
+  \
+  \mathrm{d}r
+  \\
+  =&
+  -
+  2\pi\ell
+  \epsilon_{0}
+  \int_{R_{0} - \varepsilon}^{R_{0} + \varepsilon}
+    \frac{\mathrm{d}}{\mathrm{d}r}
+    r
+    E(r)
+  \
+  \mathrm{d}r
+  \\
+  =&
+  -
+  2\pi\ell
+  \epsilon_{0}
+  \left|
+    r
+    E(r)
+  \right|_{R_{0} - \varepsilon}^{R_{0} + \varepsilon}
+  \\
+  =&
+  -
+  2\pi\ell
+  \epsilon_{0}
+  \frac{V_{0}}{\ln \frac{R_{0}}{R_{1}}}
+\end{align*}
+%
+und deswegen wir bekommen
+%
+\[
+  C =
+  -
+  \frac{2\pi\ell\epsilon_{0}}{\ln \frac{R_{0}}{R_{1}}}
+  =
+  \frac{2\pi\ell\epsilon_{0}}{\ln \frac{R_{1}}{R_{0}}}
+\]
+%
+wobei $ \ell $ ist die Länge des Zylinders.
 
 \end{document}
