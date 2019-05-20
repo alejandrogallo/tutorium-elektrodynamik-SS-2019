@@ -1,4 +1,3 @@
-%  Preamble
 \documentclass[A4paper, 12pt]{amsart}
 
 \usepackage{amsmath}
@@ -10,7 +9,7 @@
 \usepackage[]{graphicx}
 \usepackage{xcolor}
 \usepackage{tikz}
-%\usepackage[margin=0.5cm]{geometry}
+\usepackage[margin=1.5cm]{geometry}
 
 \linespread{1.5}
 
@@ -21,9 +20,13 @@
 \begin{document}
 
 \maketitle
+\tableofcontents
 
 \section{Zylindrischer Kondensator}
-
+Hier werden wir einige typische Beispiele
+besprechen, die im Rahmen von der Kondensatorthematik
+auftauchen.
+Dafür werden wir den aus der Vorlesung bekannten Satz
 %
 \begin{equation}
   %Equation for gauss theorem
@@ -31,6 +34,7 @@
   \nabla ^{2} V(\mathbf{r}) = \rho / \epsilon_{0}
 \end{equation}
 %
+brauchen.
 
 In einem zylindrisch symmetrischen Problem, d.h., wo das Potential
 $ V $ nur von $ r $ abhängt, ($ V(r, \phi, z) = V(r) $) gilt
@@ -48,6 +52,7 @@ $ V $ nur von $ r $ abhängt, ($ V(r, \phi, z) = V(r) $) gilt
 \end{equation}
 %
 
+\newpage
 \subsection{Potential im Inneren einer einfachen zylindrischen Platte}
 
 Wir betrachten einen Zylinder mit Radius $ R_{0} $ und einen
@@ -57,8 +62,11 @@ Zylinder als Integrationsvolumen $ G $.
   \input{figures/simple-cylinder.tex}
 \end{center}
 
-Im $ G $ gibt es keine Ladung, also $ \rho =0 $ und folglich
-%
+Es wird nämlich eine Funktion $ V(r) $ gesucht, wo
+$ 0 \leq r < R_{0} $.
+Wir versuchen zuerst, Gleichung~\ref{eq:gauss_theorem} direkt
+zu lösen.
+Im $ G $ gibt es keine Ladung, also $ \rho =0 $ und folglich %
 \begin{align*}
   \frac{1}{r}
   \frac{\mathrm{d}}{\mathrm{d}r}
@@ -103,19 +111,36 @@ woraus wir den allgemeinen Ausdruck für die Lösung bekommen,
   A \ln \frac{r}{r_{0}}
   +
   B
+  .
 \end{equation}
 %
-das heißt, eine Differentialgleichung zweiter Ordnung benötigt
-zwei Integrationskonstanten, die in unserem Fall mit $ A $ und $ B $
-gekennzeichnet sind.
-Wenn wir $ r_{0} = R_{0}$ setzen können wir schreiben
+Es ist bemerkenswert dass man zwei Bedingungen benötigt, um die
+Integrationskonstanten $ A $ und $ B $ zu bestimmen.
+Dies ist so da
+Gleichung~\ref{eq:gauss_theorem} eine Differentialgleichung zweiter Ordnung
+ist. Im allgemeinen finden wir aber dass
+%
+\[
+  V(r_{0}) = B.
+\]
+%
+In dem Sinne, wenn wir
+$ r_{0} = R_{0}$ setzen können wir
 \begin{equation}
   V(r) =
   A \ln \frac{r}{r_{0}}
   +
   V_{0}
 \end{equation}
-aber wir haben nicht genügende Bedingungen um $ A $ zu bestimmen.
+schreiben.
+Wir haben aber nicht genügende Bedingungen um $ A $ zu bestimmen.
+Das ist, wir können nicht \textit{Cauchy Randbedingungen} verwenden
+weil wir nur eine Information zur Verfügung haben, nämlich dass
+$ V(R_{0}) = V_{0} $.
+Wir müssen dann erkunden wie die Ableitung der Funktion $ V $ (das heißt,
+das elektrische Feld) aussieht. Wenn dies uns gelingt dann wird es uns
+ermöglichen, Bedingungen für die erste Ableitung von $ V $ zu finden,
+dementsprechend arbeiten wir hier mit \textit{Dirichlet Randbedingungen}.
 Wir können das Volumen $ G $ dafür verwenden:
 %
 \begin{align*}
@@ -132,6 +157,9 @@ Wir können das Volumen $ G $ dafür verwenden:
 \end{align*}
 %
 und deswegen haben wir im Inneren $ \mathbf{E} = 0 $, $ V = V_{0} $.
+Daraus folgt, dass $ A = 0 $ und somit haben wir die fehlende
+Integrationskonstante $ A $ bestimmt, nämlich mittels \textit{Dirichlet
+Randbedingungen}.
 
 \subsection{Potential im Inneren eines einfachen zylindrischen Kondensators}
 
