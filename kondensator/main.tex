@@ -1,5 +1,9 @@
 \documentclass[A4paper, 12pt]{amsart}
 
+\usepackage{tikz}
+\usepackage[europeanresistors,americaninductors]{circuitikz}
+\usetikzlibrary{calc,arrows,decorations.pathmorphing,intersections}
+
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
@@ -13,8 +17,10 @@
 
 \linespread{1.5}
 
-\title{Tutorium der Elektrodynamik}
-\author{Alejandro Gallo}
+\newcommand\thetitle{Tutorium der Elektrodynamik}
+\newcommand\me{Alejandro Gallo}
+\title{\thetitle}
+\author{\me}
 \date{\today}
 
 \newcommand\sourcefootnotes{
@@ -29,12 +35,17 @@
 
 \begin{document}
 
-\maketitle
+\begin{center}
+  {\Large\sc \thetitle} \sourcefootnotes\\
+  {\large\bf \me}
+\end{center}
+\vspace{3cm}
 \tableofcontents
 
-Für mehr Information können Sie im Netz Information finden\sourcefootnotes.
-
+\newpage
 \section{Zylindrischer Kondensator}
+
+\subsection{Einleitung}
 Hier werden wir einige typische Beispiele
 besprechen, die im Rahmen von der Kondensatorthematik
 auftauchen.
@@ -64,7 +75,6 @@ $ V $ nur von $ r $ abhängt, ($ V(r, \phi, z) = V(r) $) gilt
 \end{equation}
 %
 
-\newpage
 \subsection{Potential im Inneren einer einfachen zylindrischen Platte}
 
 Wir betrachten einen Zylinder mit Radius $ R_{0} $ und einen
@@ -378,5 +388,55 @@ und deswegen wir bekommen
 \]
 %
 wobei $ \ell $ ist die Länge des Zylinders.
+
+
+\newpage
+\section{Addieren von Kapazitäten}
+
+\subsection{Parallelschaltung}
+\begin{center}
+  \begin{tikzpicture}[]
+    \def\height{1}
+    \draw[thick]
+      (0,0) coordinate (start) node[vcc]{$V$}
+        to[short]++ (1,0) coordinate (left joint)
+          (left joint) to[short] ++ (0,\height)
+          to[C, l=$C_1$] ++ (2,0)
+          to[short] ++ (0,-\height) coordinate (right joint)
+          to[short] ++ (1,0) coordinate (end) node [ground] {}
+        (left joint) to[short] ++ (0,-\height)
+          to[C, l_=$C_2$] ++ (2,0)
+          to[short] ++ (0,+\height)
+    ;
+  \end{tikzpicture}
+  %
+  \begin{align*}
+    Q_{\mathrm{T}} &= Q_{1} + Q_{2} \\
+      &= C_{1} V + C_{2} V = (C_{1} + C_{2}) V = C_{\mathrm{T}} V
+  \end{align*}
+  %
+\end{center}
+\subsection{Reihenschaltung}
+\begin{center}
+  \begin{tikzpicture}[]
+    \draw[thick]
+      (0,0) coordinate (start) node[vcc]{$V$}
+        to[short]++ (1,0) coordinate (left joint)
+        to[C, l=$C_1$] ++ (2,0)
+        to[C, l=$C_2$] ++ (2,0)
+        to[short] ++ (1,0) coordinate (end) node [ground] {}
+    ;
+  \end{tikzpicture}
+  %
+  \begin{align*}
+    V &= V_{1} + V_{2} \\
+      &= \frac{Q}{C_{1}} + \frac{Q}{C_{2}} = Q \left(
+        \frac{1}{C_{1}} + \frac{1}{C_{2}}
+      \right)
+  \end{align*}
+  %
+\end{center}
+
+
 
 \end{document}
